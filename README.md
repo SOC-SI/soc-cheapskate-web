@@ -1,3 +1,11 @@
+# Netlify
+
+`npx netlify open` Opens teh admin/doc panel
+`npx netlify serve` Opens teh site localy
+`npx netlify env --help` List of command for working with enviroonment varibles (db url, password, etc.) 
+
+The plan is to make a serverless backend using Netlify serverless functions.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
