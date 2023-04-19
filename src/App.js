@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import LoginPage from "./pages/LoginPage";
+
+//TODO: some kind of routing ex. react-router
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        background: "linear-gradient(118.47deg, #E9EDF0 0.61%, #E9EDF0 100%)",
+        width: "100%",
+        minHeight: "100vh",
+      }}
+      className="App"
+    >
+      <LoginPage />
     </div>
   );
 }
