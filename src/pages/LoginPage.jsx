@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const SubmitBox = styled.div`
@@ -8,6 +9,22 @@ const SubmitBox = styled.div`
   box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8),
     10px 10px 20px rgba(166, 180, 200, 0.7);
   border-radius: 40px;
+  transition: all 0.6s ease-in-out;
+  ${({ isLoading }) =>
+    isLoading &&
+    `
+    box-shadow: inset 5px 5px 10px #d6d9e3, inset -5px -5px 10px #f7f9fc;
+  `}
+  // Disable hover effect when loading
+  ${({ isLoading }) =>
+    !isLoading &&
+    `
+    &:hover {
+      box-shadow: -8px -8px 12px rgba(255, 255, 255, 0.5),
+        8px 8px 12px rgba(166, 180, 200, 0.5);
+      cursor: pointer;
+    }
+  `}
 `;
 
 const InputBox = styled.div`
@@ -35,7 +52,36 @@ const Input = styled.input`
   }
 `;
 
+const SubmitButton = ({ isLoading, onClick }) => {
+  return (
+    <SubmitBox
+      style={{ marginTop: 36 }}
+      isLoading={isLoading}
+      onClick={onClick}
+    >
+      {isLoading ? (
+        <p style={{ marginTop: 12, padding: 0, color: "#686868" }}>
+          Loading...
+        </p>
+      ) : (
+        <p style={{ marginTop: 12, padding: 0, color: "#686868" }}>Login</p>
+      )}
+    </SubmitBox>
+  );
+};
+
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = () => {
+    setIsLoading(true);
+
+    // Simulate an API call with a timeout
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  };
+
   return (
     <div
       style={{
@@ -65,9 +111,7 @@ const LoginPage = () => {
         <InputBox>
           <Input type="text" placeholder="Enter your text here" />
         </InputBox>
-        <SubmitBox style={{ marginTop: 36 }}>
-          <p style={{ marginTop: 12, padding: 0, color: "#686868" }}>Login</p>
-        </SubmitBox>
+        <SubmitButton isLoading={isLoading} onClick={handleClick} />
       </div>
     </div>
   );
