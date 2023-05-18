@@ -3,10 +3,26 @@ import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import ResultsPage from "./pages/ResultsPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //TODO: some kind of routing ex. react-router
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <LoginPage />,
+    },
+    {
+      path: "/registration",
+      element: <RegistrationPage />,
+    },
+    {
+      path: "/results",
+      element: <ResultsPage />,
+    },
+  ]);
+
   return (
     <div
       style={{
@@ -17,9 +33,7 @@ function App() {
       }}
       className="App"
     >
-      <LoginPage />
-      {/* <RegistrationPage /> */}
-      {/* <ResultsPage /> */}
+      <RouterProvider router={router} />
     </div>
   );
 }

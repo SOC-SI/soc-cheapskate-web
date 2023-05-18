@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const SubmitBox = styled.div`
@@ -71,6 +72,7 @@ const SubmitButton = ({ isLoading, onClick }) => {
 };
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
@@ -79,6 +81,7 @@ const LoginPage = () => {
     // Simulate an API call with a timeout
     setTimeout(() => {
       setIsLoading(false);
+      navigate("/results");
     }, 2000);
   };
 
