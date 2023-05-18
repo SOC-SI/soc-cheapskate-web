@@ -187,16 +187,18 @@ const AddListPage = () => {
   };
 
   function findClosestShops() {
+    const items = Object.values(addedItems).map((v)=> v.name);
+
     const filteredShops = shopsData
       .filter((shop) =>
-        shop.products.some((product) => addedItems.includes(product.name))
+        shop.products.some((product) => items.includes(product.name))
       )
       .sort((a, b) => a.distance - b.distance)
       .slice(0, 3);
 
     const closestShops = filteredShops.map((shop) => {
       const products = shop.products.filter((product) =>
-        addedItems.includes(product.name)
+        items.includes(product.name)
       );
       const totalPrice = products.reduce(
         (sum, product) => sum + product.price,
