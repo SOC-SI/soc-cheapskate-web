@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Apple (kg)"
+    },
+    {
+        "id": 2,
+        "name": "Banana (kg)"
+    },
+    {
+        "id": 3,
+        "name": "Orange (kg)"
+    },
+    {
+        "id": 4,
+        "name": "Strawberries"
+    },
+    {
+        "id": 5,
+        "name": "Broccoli (kg)"
+    },
+    {
+        "id": 6,
+        "name": "Carrots (kg)"
+    },
+    {
+        "id": 7,
+        "name": "Lettuce"
+    },
+    {
+        "id": 8,
+        "name": "Tomato (kg)"
+    },
+    {
+        "id": 9,
+        "name": "Chicken Breast (kg)"
+    },
+    {
+        "id": 10,
+        "name": "Salmon Fillet (kg)"
+    },
+    {
+        "id": 11,
+        "name": "Milk"
+    },
+    {
+        "id": 12,
+        "name": "Bread"
+    },
+    {
+        "id": 13,
+        "name": "Coca Cola"
+    },
+    {
+        "id": 14,
+        "name": "Beer"
+    },
+    {
+        "id": 15,
+        "name": "Sweets"
+    }
+]

@@ -167,20 +167,23 @@ const AddButton = ({ onClick }) => {
 };
 
 const AddListPage = () => {
-  const [addedItems, setAddedItems] = useState([]);
+  const [addedItems, setAddedItems] = useState({});
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
   const handleAddButtonClick = () => {
-    if (selectedProduct !== "") {
-      setAddedItems((prevItems) => [...prevItems, selectedProduct]);
+    if (selectedProduct !== null) {
+      setAddedItems((prevItems) => ({
+        [selectedProduct.id]: selectedProduct,
+        ...prevItems,
+      }));
       console.log("Selected product added to the list:", selectedProduct);
     }
   };
 
-  const handleSelectProduct = (name) => {
-    setSelectedProduct(name);
+  const handleSelectProduct = (item) => {
+    setSelectedProduct(item);
   };
 
   const handleClick = () => {
@@ -192,10 +195,6 @@ const AddListPage = () => {
       navigate("/results");
     }, 2000);
   };
-
-  const productNames = shopsData.flatMap((shop) =>
-    shop.products.map((product) => product.name)
-  );
 
   return (
     <div
@@ -227,15 +226,14 @@ const AddListPage = () => {
           }}
         >
           <Dropdown
-            options={productNames}
+            selectedProduct={selectedProduct}
             onSelect={handleSelectProduct}
-            selectedOption={selectedProduct}
           />
           <AddButton onClick={handleAddButtonClick} />
         </div>
         <List>
-          {addedItems.map((item) => (
-            <p key={item}>{item}</p>
+          {Object.values(addedItems).map((item) => (
+            <p key={item}>{item.name}</p>
           ))}
         </List>
 

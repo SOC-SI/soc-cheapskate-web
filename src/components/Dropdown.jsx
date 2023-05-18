@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { melisearch } from "../services/melisearch";
 
 const Input = styled.input`
   border: none;
@@ -51,27 +52,36 @@ const DropdownListItem = styled.li`
   }
 `;
 
-const Dropdown = ({ options, onSelect }) => {
+const index = melisearch.index("items");
+
+const Dropdown = ({ onSelect, selectedProduct }) => {
   const [inputValue, setInputValue] = useState("");
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [searchOptions, setSearchOptions] = useState([]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
     setDropdownVisible(true);
   };
 
-  const handleSelectOption = (option) => {
-    setInputValue(option);
-    onSelect(option);
+  const handleSelectOption = (item) => {
+    setInputValue(item.name);
+    onSelect(item);
     setDropdownVisible(false);
   };
 
-  const uniqueNamesSet = new Set(options);
-  const uniqueNames = Array.from(uniqueNamesSet);
+  useEffect(() => {
+    (async () => {
+      const hits = await index.search(inputValue);
+      setSearchOptions(hits.hits);
+    })();
+  }, [setSearchOptions, inputValue]);
 
-  const filteredOptions = uniqueNames.filter((name) =>
-    name.toLowerCase().includes(inputValue.toLowerCase())
-  );
+  useEffect(() => {
+    if(inputValue !== selectedProduct?.name) {
+      onSelect([]);
+    }
+  }, [inputValue]);
 
   return (
     <InputBox>
@@ -83,12 +93,12 @@ const Dropdown = ({ options, onSelect }) => {
       />
       {isDropdownVisible && inputValue && (
         <DropdownList>
-          {filteredOptions.map((name, index) => (
+          {searchOptions.map((item, index) => (
             <DropdownListItem
               key={index}
-              onClick={() => handleSelectOption(name)}
+              onClick={() => handleSelectOption(item)}
             >
-              {name}
+              {item.name}
             </DropdownListItem>
           ))}
         </DropdownList>

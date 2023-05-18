@@ -4,6 +4,7 @@ import HeartIcon from "../heart.svg";
 import HeartFilledIcon from "../heart-selected.svg";
 import ShareIcon from "../share.svg";
 import AddIcon from "../add.svg";
+import { Link } from "react-router-dom";
 
 /* Rectangle 3 */
 const Rectangle = styled.span`
@@ -82,10 +83,10 @@ const ListItem = ({ isSelected, children }) => {
         alignItems: "center",
       }}
     >
-      <Rectangle style={{ "margin-right": "32px" }}>
+      <Rectangle style={{ marginRight: "32px" }}>
         <Text>{children}</Text>
       </Rectangle>
-      <IconButton style={{ "margin-right": "10px" }}>
+      <IconButton style={{ marginRight: "10px" }}>
         <img
           src={isSelected ? HeartFilledIcon : HeartIcon}
           alt="Favorite"
@@ -155,17 +156,19 @@ const HomePage = () => {
           <ListItem isSelected={true}>Some other text</ListItem>
         </div>
 
-        <FixedButton>
-          <img
-            src={AddIcon}
-            alt="Add new list"
-            style={{
-              top: "14px",
-              left: "14px",
-              display: "absolute",
-            }}
-          />
-        </FixedButton>
+        <Link to="/addList">
+          <FixedButton>
+            <img
+              src={AddIcon}
+              alt="Add new list"
+              style={{
+                top: "14px",
+                left: "14px",
+                display: "absolute",
+              }}
+            />
+          </FixedButton>
+        </Link>
       </div>
     </div>
   );
