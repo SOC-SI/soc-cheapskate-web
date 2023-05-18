@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TitleBox } from "./ResultsPage";
+import { TitleBox } from "./AddListPage";
 import HeartIcon from "../heart.svg";
 import HeartFilledIcon from "../heart-selected.svg";
 import ShareIcon from "../share.svg";
@@ -54,16 +54,16 @@ const Text = styled.span`
 `;
 
 const FixedButton = styled.div`
-  box-sizing: border-box;
-  position: fixed;
-  bottom: 95px;
-  width: 97px;
-  height: 96px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 74px;
+  height: 74px;
   background: linear-gradient(134.17deg, #eef0f5 4.98%, #e6e9ef 94.88%);
   box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8),
     10px 10px 20px rgba(166, 180, 200, 0.7);
-  border-radius: 40px;
-  padding-top: 31px;
+  border-radius: 30px;
 
   &:hover {
     box-shadow: -8px -8px 12px rgba(255, 255, 255, 0.5),
@@ -71,6 +71,23 @@ const FixedButton = styled.div`
     cursor: pointer;
   }
 `;
+
+const TitleComponent = () => {
+  return (
+    <TitleBox style={{ marginTop: 36 }}>
+      <p
+        style={{
+          marginTop: 5,
+          padding: 0,
+          color: "#EB76D8",
+          fontSize: 32,
+        }}
+      >
+        Add List
+      </p>
+    </TitleBox>
+  );
+};
 
 const ListItem = ({ isSelected, children, data }) => {
   const [favorite, setFavorite] = useState();
@@ -80,7 +97,7 @@ const ListItem = ({ isSelected, children, data }) => {
         height: "47px",
         display: "flex",
         justifyContent: "center",
-        width: "600px",
+        width: "330px",
         flexDirection: "row",
         textAlign: "center",
         alignItems: "center",
@@ -138,10 +155,8 @@ const HomePage = () => {
           alignItems: "center",
         }}
       >
-        <TitleBox style={{ marginTop: 30 }}>
-          <h1 style={{ color: "#5E6FDF", margin: 0 }}>Results</h1>
-        </TitleBox>
-        <p style={{ color: "#686868", fontSize: "21px", marginBottom: 36 }}>
+        <TitleComponent />
+        <p style={{ color: "#686868", fontSize: "18px", marginBottom: 36 }}>
           History of shopping lists
         </p>
 
@@ -166,9 +181,8 @@ const HomePage = () => {
               src={AddIcon}
               alt="Add new list"
               style={{
-                top: "14px",
-                left: "14px",
-                display: "absolute",
+                width: "24px",
+                height: "24px",
               }}
             />
           </FixedButton>
