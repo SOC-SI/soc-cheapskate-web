@@ -183,14 +183,40 @@ const AddListPage = () => {
     setSelectedProduct(name);
   };
 
+  function findClosestShops() {
+    const filteredShops = shopsData
+      .filter((shop) =>
+        shop.products.some((product) => addedItems.includes(product.name))
+      )
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 3);
+
+    const closestShops = filteredShops.map((shop) => {
+      const products = shop.products.filter((product) =>
+        addedItems.includes(product.name)
+      );
+      const totalPrice = products.reduce(
+        (sum, product) => sum + product.price,
+        0
+      );
+
+      return {
+        name: shop.name,
+        distance: shop.distance,
+        products,
+        street: shop.street,
+        totalPrice,
+      };
+    });
+
+    return closestShops;
+  }
+
   const handleClick = () => {
     setIsLoading(true);
-
-    // Simulate an API call with a timeout
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate("/results");
-    }, 2000);
+    const closestShops = findClosestShops();
+    setIsLoading(false);
+    navigate("/results", { state: { closestShops } });
   };
 
   const productNames = shopsData.flatMap((shop) =>

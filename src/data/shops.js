@@ -2,6 +2,7 @@ export const shopsData = [
   {
     name: "Merkator šiška",
     distance: 2.5,
+    street: "Trubarjeva cesta 23",
     products: [
       { name: "Apple (kg)", price: 1.99 },
       { name: "Banana (kg)", price: 0.99 },
@@ -23,6 +24,7 @@ export const shopsData = [
   {
     name: "Merkator center Bežigrad",
     distance: 3.7,
+    street: "Slovenska cesta 9,",
     products: [
       { name: "Apple (kg)", price: 2.09 },
       { name: "Banana (kg)", price: 1.19 },
@@ -44,6 +46,7 @@ export const shopsData = [
   {
     name: "Hofer litijska ulica 36",
     distance: 3.2,
+    street: "Miklošičeva cesta 1",
     products: [
       { name: "Apple (kg)", price: 1.99 },
       { name: "Banana (kg)", price: 0.99 },
@@ -64,6 +67,7 @@ export const shopsData = [
   },
   {
     name: "Hofer Triglavska 22",
+    street: "Partizanska cesta 12",
     distance: 2.1,
     products: [
       { name: "Apple (kg)", price: 1.99 },
@@ -86,6 +90,7 @@ export const shopsData = [
   {
     name: "ŠPAR Europark",
     distance: 10,
+    street: "Gosposvetska ulica 5",
     products: [
       { name: "Apple (kg)", price: 1.99 },
       { name: "Banana (kg)", price: 0.99 },
@@ -107,6 +112,7 @@ export const shopsData = [
   {
     name: "ŠPAR Qlandia Maribor",
     distance: 1.2,
+    street: "Modra cesta v zalog 75",
     products: [
       { name: "Apple (kg)", price: 2.09 },
       { name: "Banana (kg)", price: 1.09 },
