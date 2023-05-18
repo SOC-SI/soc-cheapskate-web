@@ -25,12 +25,16 @@ function App() {
     },
     {
       path: "/home",
-      element: <HomePage />
+      element: <HomePage />,
     },
     {
       path: "/addList",
       element: <AddListPage />,
-    }
+    },
+    {
+      path: "/home",
+      element: <HomePage />,
+    },
   ]);
 
   return (

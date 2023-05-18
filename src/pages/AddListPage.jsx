@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Dropdown from "../components/Dropdown";
+import { shopsData } from "../data/shops";
 
 const TitleBox = styled.div`
   box-sizing: border-box;
@@ -24,16 +26,6 @@ const InputBox = styled.div`
   margin-right: 5px;
 `;
 
-const List = styled.div`
-  box-sizing: border-box;
-  width: 299px;
-  height: 300px;
-  background: linear-gradient(134.17deg, #eef1f5 4.98%, #e6e9ef 94.88%);
-  box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.75),
-    inset 5px 5px 10px rgba(166, 180, 200, 0.75);
-  border-radius: 40px;
-`;
-
 const Input = styled.input`
   border: none;
   background: transparent;
@@ -46,6 +38,39 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+`;
+
+const DropdownList = styled.ul`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  z-index: 1;
+`;
+
+const DropdownListItem = styled.li`
+  padding: 8px 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
+`;
+
+const List = styled.div`
+  box-sizing: border-box;
+  width: 299px;
+  height: 300px;
+  background: linear-gradient(134.17deg, #eef1f5 4.98%, #e6e9ef 94.88%);
+  box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.75),
+    inset 5px 5px 10px rgba(166, 180, 200, 0.75);
+  border-radius: 40px;
 `;
 
 const AddBox = styled.div`
@@ -142,8 +167,21 @@ const AddButton = ({ onClick }) => {
 };
 
 const AddListPage = () => {
+  const [addedItems, setAddedItems] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState("");
+
+  const handleAddButtonClick = () => {
+    if (selectedProduct !== "") {
+      setAddedItems((prevItems) => [...prevItems, selectedProduct]);
+      console.log("Selected product added to the list:", selectedProduct);
+    }
+  };
+
+  const handleSelectProduct = (name) => {
+    setSelectedProduct(name);
+  };
 
   const handleClick = () => {
     setIsLoading(true);
@@ -154,6 +192,10 @@ const AddListPage = () => {
       navigate("/results");
     }, 2000);
   };
+
+  const productNames = shopsData.flatMap((shop) =>
+    shop.products.map((product) => product.name)
+  );
 
   return (
     <div
@@ -184,12 +226,18 @@ const AddListPage = () => {
             display: "flex",
           }}
         >
-          <InputBox>
-            <Input type="text" placeholder="Search for Items" />
-          </InputBox>
-          <AddButton />
+          <Dropdown
+            options={productNames}
+            onSelect={handleSelectProduct}
+            selectedOption={selectedProduct}
+          />
+          <AddButton onClick={handleAddButtonClick} />
         </div>
-        <List />
+        <List>
+          {addedItems.map((item) => (
+            <p key={item}>{item}</p>
+          ))}
+        </List>
 
         <SubmitButton isLoading={isLoading} onClick={handleClick} />
       </div>
