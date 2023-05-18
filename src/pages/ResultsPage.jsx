@@ -9,7 +9,7 @@ const SubmitBox = styled.div`
     10px 10px 20px rgba(166, 180, 200, 0.7);
   border-radius: 40px;
 `;
-const TitleBox = styled.div`
+export const TitleBox = styled.div`
     width: 100%;
   box-sizing: border-box;
   padding: 10px 30px;
