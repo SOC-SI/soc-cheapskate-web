@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const TitleBox = styled.div`
+export const TitleBox = styled.div`
   box-sizing: border-box;
   width: 328px;
   height: 53px;

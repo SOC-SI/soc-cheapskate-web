@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { auth } from "../services/auth";
 
 const SubmitBox = styled.div`
   box-sizing: border-box;
@@ -53,7 +54,7 @@ const Input = styled.input`
   }
 `;
 
-const SubmitButton = ({ isLoading, onClick }) => {
+export const SubmitButton = ({ isLoading, onClick, children }) => {
   return (
     <SubmitBox
       style={{ marginTop: 36 }}
@@ -65,7 +66,9 @@ const SubmitButton = ({ isLoading, onClick }) => {
           Loading...
         </p>
       ) : (
-        <p style={{ marginTop: 12, padding: 0, color: "#686868" }}>Login</p>
+        <p style={{ marginTop: 12, padding: 0, color: "#686868" }}>
+          {children}
+        </p>
       )}
     </SubmitBox>
   );
@@ -75,14 +78,22 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleClick = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleClick = async () => {
+    if (isLoading) return;
     setIsLoading(true);
 
-    // Simulate an API call with a timeout
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate("/results");
-    }, 2000);
+    try {
+      let response = await auth.login(email, password, true);
+      console.log(response);
+      navigate("/");
+    } catch (e) {
+      alert(e);
+    }
+
+    setIsLoading(false);
   };
 
   return (
@@ -109,12 +120,29 @@ const LoginPage = () => {
           Welcome back!
         </p>
         <InputBox>
-          <Input type="text" placeholder="Enter your text here" />
+          <Input
+            type="text"
+            autocomplete="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </InputBox>
         <InputBox>
-          <Input type="text" placeholder="Enter your text here" />
+          <Input
+            type="password"
+            autocomplete="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </InputBox>
-        <SubmitButton isLoading={isLoading} onClick={handleClick} />
+        <SubmitButton isLoading={isLoading} onClick={handleClick}>
+          Login
+        </SubmitButton>
+        <Link to="/register" style={{ marginTop: "10px" }}>
+          Don't have a account yet?
+        </Link>
       </div>
     </div>
   );
