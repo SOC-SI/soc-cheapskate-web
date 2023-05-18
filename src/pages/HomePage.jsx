@@ -5,6 +5,8 @@ import HeartFilledIcon from "../heart-selected.svg";
 import ShareIcon from "../share.svg";
 import AddIcon from "../add.svg";
 import { Link } from "react-router-dom";
+import { useSavedList } from '../hooks/localstorage';
+import { useState } from "react";
 
 /* Rectangle 3 */
 const Rectangle = styled.span`
@@ -70,7 +72,8 @@ const FixedButton = styled.div`
   }
 `;
 
-const ListItem = ({ isSelected, children }) => {
+const ListItem = ({ isSelected, children, data }) => {
+  const [favorite, setFavorite] = useState();
   return (
     <div
       style={{
@@ -86,9 +89,9 @@ const ListItem = ({ isSelected, children }) => {
       <Rectangle style={{ marginRight: "32px" }}>
         <Text>{children}</Text>
       </Rectangle>
-      <IconButton style={{ marginRight: "10px" }}>
+      <IconButton style={{ marginRight: "10px" }} onClick={() => setFavorite(!favorite)}>
         <img
-          src={isSelected ? HeartFilledIcon : HeartIcon}
+          src={favorite ? HeartFilledIcon : HeartIcon}
           alt="Favorite"
           style={{
             top: "14px",
@@ -113,6 +116,8 @@ const ListItem = ({ isSelected, children }) => {
 };
 
 const HomePage = () => {
+  const [savedList, setSavedList] = useSavedList();
+
   return (
     <div
       style={{
@@ -152,8 +157,7 @@ const HomePage = () => {
             gap: "17px",
           }}
         >
-          <ListItem>Text</ListItem>
-          <ListItem isSelected={true}>Some other text</ListItem>
+          {savedList.map(data => (<Link to="/addList" state={{ addedItems: data.addedItems }}><ListItem data={data}> {data.time}</ListItem></Link>))}
         </div>
 
         <Link to="/addList">

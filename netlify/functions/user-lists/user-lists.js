@@ -36,7 +36,7 @@ const handler = async function (event, context) {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ identity, user }),
+      body: JSON.stringify({ identity, user, msg: data.value }),
     }
   } catch (error) {
     // output to netlify function log

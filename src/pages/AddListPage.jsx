@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Dropdown from "../components/Dropdown";
 import { shopsData } from "../data/shops";
+import { useSavedList } from '../hooks/localstorage';
 
 export const TitleBox = styled.div`
   box-sizing: border-box;
@@ -167,7 +168,9 @@ const AddButton = ({ onClick }) => {
 };
 
 const AddListPage = () => {
-  const [addedItems, setAddedItems] = useState({});
+  const location = useLocation();
+  let [list, setList] = useSavedList();
+  const [addedItems, setAddedItems] = useState(location.state?.addedItems || {});
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -187,7 +190,7 @@ const AddListPage = () => {
   };
 
   function findClosestShops() {
-    const items = Object.values(addedItems).map((v)=> v.name);
+    const items = Object.values(addedItems).map((v) => v.name);
 
     const filteredShops = shopsData
       .filter((shop) =>
@@ -221,7 +224,8 @@ const AddListPage = () => {
     setIsLoading(true);
     const closestShops = findClosestShops();
     setIsLoading(false);
-    navigate("/results", { state: { closestShops } });
+    setList([{ addedItems, time: new Date() }, ...list])
+    navigate("/results", { state: { closestShops, addedItems } });
   };
 
   return (
