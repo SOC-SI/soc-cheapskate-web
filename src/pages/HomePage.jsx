@@ -68,7 +68,7 @@ padding-top: 31px;
 }
 `;
 
-const ListItem = ({ isSelected }) => {
+const ListItem = ({ isSelected, children }) => {
   return (
     <div
       style={{
@@ -82,7 +82,7 @@ const ListItem = ({ isSelected }) => {
       }}
     >
       <Rectangle style={{ "margin-right": "32px" }}>
-        <Text>Test</Text>
+        <Text>{children}</Text>
       </Rectangle>
       <IconButton style={{ "margin-right": "10px" }}>
         <img
@@ -150,8 +150,8 @@ const HomePage = () => {
             gap: "17px",
           }}
         >
-          <ListItem />
-          <ListItem isSelected={true} />
+          <ListItem>Text</ListItem>
+          <ListItem isSelected={true} >Some other text</ListItem>
         </div>
 
         <FixedButton>
