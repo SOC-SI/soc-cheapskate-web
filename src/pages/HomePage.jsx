@@ -3,6 +3,7 @@ import { TitleBox } from "./ResultsPage";
 import HeartIcon from "../heart.svg";
 import HeartFilledIcon from "../heart-selected.svg";
 import ShareIcon from "../share.svg";
+import AddIcon from "../add.svg";
 
 /* Rectangle 3 */
 const Rectangle = styled.span`
@@ -52,11 +53,19 @@ const Text = styled.span`
 const FixedButton = styled.div`
 box-sizing: border-box;
 position: fixed;
+bottom: 95px;
 width: 97px;
 height: 96px;
 background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
 box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 20px rgba(166, 180, 200, 0.7);
 border-radius: 40px;
+padding-top: 31px;
+
+&:hover {
+  box-shadow: -8px -8px 12px rgba(255, 255, 255, 0.5),
+    8px 8px 12px rgba(166, 180, 200, 0.5);
+  cursor: pointer;
+}
 `;
 
 const ListItem = ({ isSelected }) => {
@@ -145,7 +154,13 @@ const HomePage = () => {
           <ListItem isSelected={true} />
         </div>
 
-        <FixedButton></FixedButton>
+        <FixedButton>
+          <img src={AddIcon} alt="Add new list" style={{
+            top: "14px",
+            left: "14px",
+            display: "absolute",
+          }}/>
+        </FixedButton>
       </div>
     </div>
   );
