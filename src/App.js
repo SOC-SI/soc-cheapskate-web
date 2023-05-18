@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import ResultsPage from "./pages/ResultsPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AddListPage from "./pages/AddListPage";
 
 //TODO: some kind of routing ex. react-router
 
@@ -20,6 +21,10 @@ function App() {
     {
       path: "/results",
       element: <ResultsPage />,
+    },
+    {
+      path: "/addList",
+      element: <AddListPage />,
     },
   ]);
 
