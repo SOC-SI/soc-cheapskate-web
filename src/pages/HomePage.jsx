@@ -151,7 +151,7 @@ const HomePage = () => {
         }}
       >
         <TitleComponent />
-        <p style={{ color: "#686868", fontSize: "21px", marginBottom: 36 }}>
+        <p style={{ color: "#686868", fontSize: "18px", marginBottom: 36 }}>
           History of shopping lists
         </p>
 
