@@ -6,35 +6,37 @@ import ResultsPage from "./pages/ResultsPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AddListPage from "./pages/AddListPage";
+import PrivateRoute from "./services/private-route";
+import LogoutPage from "./pages/LogoutPage";
 
 //TODO: some kind of routing ex. react-router
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/login",
       element: <LoginPage />,
     },
     {
-      path: "/registration",
+      path: "/logout",
+      element: <LogoutPage />,
+    },
+    {
+      path: "/register",
       element: <RegistrationPage />,
     },
     {
       path: "/results",
-      element: <ResultsPage />,
+      element: <PrivateRoute><ResultsPage /></PrivateRoute>,
     },
     {
-      path: "/home",
-      element: <HomePage />,
+      path: "/",
+      element: <PrivateRoute><HomePage /></PrivateRoute>
     },
     {
       path: "/addList",
-      element: <AddListPage />,
-    },
-    {
-      path: "/home",
-      element: <HomePage />,
-    },
+      element: <PrivateRoute><AddListPage /></PrivateRoute>,
+    }
   ]);
 
   return (

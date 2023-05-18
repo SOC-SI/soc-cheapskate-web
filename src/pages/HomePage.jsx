@@ -4,6 +4,7 @@ import HeartIcon from "../heart.svg";
 import HeartFilledIcon from "../heart-selected.svg";
 import ShareIcon from "../share.svg";
 import AddIcon from "../add.svg";
+import { Link } from "react-router-dom";
 
 /* Rectangle 3 */
 const Rectangle = styled.span`
@@ -51,21 +52,22 @@ const Text = styled.span`
 `;
 
 const FixedButton = styled.div`
-box-sizing: border-box;
-position: fixed;
-bottom: 95px;
-width: 97px;
-height: 96px;
-background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
-box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 20px rgba(166, 180, 200, 0.7);
-border-radius: 40px;
-padding-top: 31px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 95px;
+  width: 97px;
+  height: 96px;
+  background: linear-gradient(134.17deg, #eef0f5 4.98%, #e6e9ef 94.88%);
+  box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8),
+    10px 10px 20px rgba(166, 180, 200, 0.7);
+  border-radius: 40px;
+  padding-top: 31px;
 
-&:hover {
-  box-shadow: -8px -8px 12px rgba(255, 255, 255, 0.5),
-    8px 8px 12px rgba(166, 180, 200, 0.5);
-  cursor: pointer;
-}
+  &:hover {
+    box-shadow: -8px -8px 12px rgba(255, 255, 255, 0.5),
+      8px 8px 12px rgba(166, 180, 200, 0.5);
+    cursor: pointer;
+  }
 `;
 
 const ListItem = ({ isSelected, children }) => {
@@ -81,10 +83,10 @@ const ListItem = ({ isSelected, children }) => {
         alignItems: "center",
       }}
     >
-      <Rectangle style={{ "margin-right": "32px" }}>
+      <Rectangle style={{ marginRight: "32px" }}>
         <Text>{children}</Text>
       </Rectangle>
-      <IconButton style={{ "margin-right": "10px" }}>
+      <IconButton style={{ marginRight: "10px" }}>
         <img
           src={isSelected ? HeartFilledIcon : HeartIcon}
           alt="Favorite"
@@ -151,16 +153,22 @@ const HomePage = () => {
           }}
         >
           <ListItem>Text</ListItem>
-          <ListItem isSelected={true} >Some other text</ListItem>
+          <ListItem isSelected={true}>Some other text</ListItem>
         </div>
 
-        <FixedButton>
-          <img src={AddIcon} alt="Add new list" style={{
-            top: "14px",
-            left: "14px",
-            display: "absolute",
-          }}/>
-        </FixedButton>
+        <Link to="/addList">
+          <FixedButton>
+            <img
+              src={AddIcon}
+              alt="Add new list"
+              style={{
+                top: "14px",
+                left: "14px",
+                display: "absolute",
+              }}
+            />
+          </FixedButton>
+        </Link>
       </div>
     </div>
   );
